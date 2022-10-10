@@ -1,0 +1,52 @@
+<div fxLayout="column" fxFlex fxLayoutGap="10px">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" fxFlex="50px">
+    <mat-form-field appearance="outline" floatLabel="never">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Suchen..." [formControl]="search">
+    </mat-form-field>
+    <button mat-icon-button [matMenuTriggerFor]="menu" [matBadgeHidden]="getBasketEvent().length === 0"
+      [matBadge]="getBasketEvent().length">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="basket-menu">
+      <mat-list fxLayout="column" fxLayoutGap="5px">
+        <mat-list-item *ngIf="getBasketEvent().length === 0">Your basket is empty.😕</mat-list-item>
+        <mat-list-item *ngFor="let event of getBasketEvent()">
+          <img class="basket-event-img" [src]="event.flyerFront" alt="Event-Image" fxFlex="50px"
+            (error)="event.flyerFront='assets/noimage.jpg'">
+          <div class="basket-event-title" fxLayout="row" fxLayoutAlign="space-between" fxFlex>
+            <div style="display:flex; align-items:center;">{{event.title}}</div>
+            <button mat-icon-button matSuffix (click)="$event.stopPropagation(); removeEvent(event)"
+              class="remove-button">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-menu>
+  </mat-toolbar>
+  <div class="event-group" *ngFor="let key of sortedKeys" fxLayout="column" fxLayoutAlign="center center"
+    fxLayoutGap="10px">
+    <p class="event-group-name" *ngIf="isDate(key)">{{key | date:'EEE MMM d y'}}</p>
+    <p class="event-group-name" *ngIf="!isDate(key)">Date is not fixed</p>
+    <div class="events" fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px">
+      <mat-card *ngFor="let e of groupedEvents[key]" fxFlex="300px" fxLayout="column">
+        <mat-card-title fxFlex="15">{{e.title}}</mat-card-title>
+        <img [src]="e.flyerFront" alt="Event-Image" fxFlex="70" (error)="e.flyerFront='assets/noimage.jpg'">
+        <mat-card-content fxLayout="column" fxLayoutAlign="start start" fxFlex="10">
+          <div fxLayout="row" class="location" (click)="navigateTo(e.venue.direction)">
+            <mat-icon>location_on</mat-icon>
+            <p>{{e.venue?.name}}</p>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between" style="width:100%" *ngIf="e.startTime">
+            <p class="date">Starts: {{e.startTime | date:'dd.MM.yyyy, HH:mm:ss'}} <br /> Ends: {{e.endTime |
+              date:'dd.MM.yyyy, HH:mm:ss'}}</p>
+            <button mat-icon-button>
+              <mat-icon (click)="addEvent(e)">add_circle</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

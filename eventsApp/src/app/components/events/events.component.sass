@@ -1,0 +1,96 @@
+\:host
+  flex: 1 1 auto
+
+mat-toolbar
+  position: fixed
+  position: -webkit-sticky
+  top: 0
+  z-index: 1000
+  height: 50px
+  background-color: cadetblue
+  box-shadow: 0px 1px 10px #000000a1
+  width: 100%
+
+mat-form-field
+  font-size: 12pt
+  margin-top: 20px
+
+.events
+  overflow-y: auto
+
+mat-card
+  height: 500px
+  padding-left: 0
+  padding-right: 0
+  margin-bottom: 10px
+
+img
+  height: 100%
+  width: 100%
+
+mat-card-title
+  font-size: 11pt
+  margin: 0
+  padding-left: 15px
+  padding-right: 15px
+
+mat-card-content
+  margin: 0
+  padding-left: 15px
+  padding-right: 15px
+
+.location
+  margin-top: 5px !important
+  margin-left: -5px !important
+  cursor: pointer
+
+  &:hover
+    color: var(--color-1)
+
+  p
+    margin-top: 2px
+    margin-bottom: 8px
+    font-weight: 500
+
+  mat-icon
+    color: var(--color-1)
+
+.mat-icon-button:hover
+  color: var(--color-1)
+
+.date
+  color: #6f6f6f
+  font-size: 9pt
+  line-height: 1.5
+
+.event-group
+  margin-top: 60px
+
+.event-group-name
+  position: -webkit-sticky
+  position: sticky
+  top: 50px
+  width: 100%
+  text-align: center
+  font-weight: 600
+  font-size: 13pt
+  background: #ffffffc9
+  z-index: 10
+  padding: 10px 0
+  color: cadetblue
+
+\::ng-deep .mat-menu-panel
+  max-width: fit-content !important
+
+.remove-button
+  float: right
+
+  &:hover
+    color: red
+
+.basket-event-img
+  margin-right: 5px
+
+.basket-event-title
+  display: flex
+  align-items: center
